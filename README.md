@@ -1,9 +1,3 @@
----
-services: azure-resource-manager
-platforms: python
-author: dwilliams
----
-
 I have to give a shoutout to the Microsoft Azure quick start repo for helping me out! [Azure Template Repo](https://github.com/azure-samples)
 
 ### To setup your environment, do the following:
