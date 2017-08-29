@@ -1,0 +1,58 @@
+---
+
+- name: Hosts
+  gather_facts: no
+  hosts: localhost
+
+  tasks:
+    - name: add packages
+      yum:
+        name: "{{ item }}"
+      with_items:
+        - qemu-kvm
+        - qemu-img
+        - libvirt
+        - libvirt-python
+        - libvirt-client
+        - virt-install
+        - virt-viewer
+        - bridge-utils
+        - ruby-devel
+        - gcc
+        - libxslt-devel
+        - libxml2-devel
+        - libvirt-devel
+        # - libguestfs-tools-C
+      become: yes
+
+    - name: get url
+      get_url:
+        url: "https://releases.hashicorp.com/vagrant/1.9.3/vagrant_1.9.5_x86_64.rpm"
+        dest: '/tmp/vagrant_1.9.5.rpm'
+        validate_certs: no
+      
+    - name: install Vagrant
+      yum:
+        name: '/tmp/vagrant_1.9.3.rpm'
+        state: present
+      become: yes
+
+    - name:
+      shell: 'vagrant plugin install vagrant-libvirt'
+      #become: yes
+
+    - name: install pips
+      pip:
+        name: "{{ item }}"
+      with_items:
+        - setuptools
+        - ipaddress
+        - pydotplus
+        - jinja2
+      become: yes
+    
+    - shell: "{{ item }}"
+      with_items: 
+        - systemctl start libvirtd
+        - systemctl enable livirtd
+      become: yes
