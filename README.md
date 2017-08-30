@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dancwilliams/azure_dynamic_test_env.svg?branch=master)](https://travis-ci.org/dancwilliams/azure_dynamic_test_env)
+
 I have to give a shoutout to the Microsoft Azure quick start repo for helping me out! [Azure Template Repo](https://github.com/azure-samples)
 
 ### To setup your environment, do the following:
