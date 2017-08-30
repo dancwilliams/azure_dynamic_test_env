@@ -29,8 +29,8 @@ def get_credentials():
     subscription_id = os.environ['AZURE_SUBSCRIPTION_ID']
     credentials = ServicePrincipalCredentials(
         client_id=os.environ['AZURE_CLIENT_ID'],
-        CLIENT_SECRET=os.environ['AZURE_CLIENT_SECRET'],
-        TENANT_ID=os.environ['AZURE_TENANT_ID']
+        secret=os.environ['AZURE_CLIENT_SECRET'],
+        tenant=os.environ['AZURE_TENANT_ID']
     )
     return credentials, subscription_id
 
