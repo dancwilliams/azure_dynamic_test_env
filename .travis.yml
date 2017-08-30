@@ -16,6 +16,6 @@ os:
 install:
 - pip install -r requirements.txt
 script:
-- pwd && ls -ltr ~/ && python azure_deployment.py && source ~/.bashrc && echo $AZURE_DNS_NAME
+- pwd && ssh-keygen -t rsa -N "" -f id_rsa && python azure_deployment.py && source ~/.bashrc && echo $AZURE_DNS_NAME
 after_script:
 - python delete_resources.py
