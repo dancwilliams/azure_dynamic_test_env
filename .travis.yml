@@ -8,6 +8,7 @@ env:
 sudo: true
 language: python
 dist: trusty
+python: 2.7
 os:
   - linux
 
@@ -15,7 +16,7 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - python azure_deploy.py
+  - python azure_deployment.py
   - source ~/.bashrc
   - echo $AZURE_DNS_NAME
 
