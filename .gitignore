@@ -1,4 +1,9 @@
-<<<<<<< HEAD
+# KEYS
+
+id_rsa
+id_rsa.pub
+azure_dns
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
