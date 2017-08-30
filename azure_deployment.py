@@ -1,5 +1,5 @@
 import os
-import os.patha
+import os.path
 from deployer import Deployer
 
 
