@@ -7,14 +7,15 @@ env:
 
 sudo: true
 language: python
+dist: trusty
 os:
   - linux
 
 install:
-  - pip install requirements
+  - pip install -r requirements.txt
 
 bring_up_azure_environment:
-  - pyhton azure_deploy.py
+  - python azure_deploy.py
 
 prepare_environment:
   - source ~/.bashrc
