@@ -14,13 +14,11 @@ os:
 install:
   - pip install -r requirements.txt
 
-bring_up_azure_environment:
+script:
   - python azure_deploy.py
-
-prepare_environment:
   - source ~/.bashrc
   - echo $AZURE_DNS_NAME
 
-destroy_azure_environment:
+after_script:
   - python delete_resources.py
 
