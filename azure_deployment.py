@@ -12,6 +12,8 @@ my_subscription_id = os.environ.get('AZURE_SUBSCRIPTION_ID', '11111111-1111-1111
 my_resource_group = 'cumulustest'            # the resource group for deployment
 my_pub_ssh_key_path = os.path.expanduser('/home/travis/build/dancwilliams/azure_dynamic_test_env/id_rsa.pub')   # the path to your rsa public key file
 
+print (my_pub_ssh_key_path)
+
 msg = "\nInitializing the Deployer class\n"
 print(msg)
 

@@ -21,7 +21,7 @@ install:
 script:
 - pwd && ssh-keygen -t rsa -N "" -f id_rsa && python azure_deployment.py && AZURE_DNS_NAME=$(<
   azure_dns) && echo $AZURE_DNS_NAME && ping -c 5 $AZURE_DNS_NAME && ssh -o "StrictHostKeyChecking
-  no" $AZURE_DNS_NAME && echo "ssh -i /home/travis/build/dancwilliams/azure_dynamic_test_env/id_rsa $AZURE_SSH_USER@$AZURE_DNS_NAME" &&
+  no" $AZURE_DNS_NAME && ssh -vvv -i /home/travis/build/dancwilliams/azure_dynamic_test_env/id_rsa cumulus@$AZURE_DNS_NAME &&
   pwd && exit
 after_script:
 - python delete_resources.py
