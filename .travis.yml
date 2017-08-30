@@ -12,8 +12,12 @@ os:
 install:
   - pip install requirements
 
-bring_up_dev_server:
+bring_up_azure_environment:
   - pyhton azure_deploy.py
+
+prepare_environment:
+  - source ~/.bashrc
+  - echo $AZURE_DNS_NAME
 
 destroy_azure_environment:
   - python delete_resources.py

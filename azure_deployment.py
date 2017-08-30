@@ -26,8 +26,8 @@ print("Done deploying!!\n\nYou can connect via: `ssh cumulus@{}.eastus.cloudapp.
 
 dns_name = ("{}.eastus.cloudapp.azure.com".format(deployer.dns_label_prefix))
 
-with open("temp.txt", "wr") as f: 
-    f.write(dns_name) 
+with open("~/.bashrc", "a") as f: 
+    f.write("export AZURE_DNS_NAME=" + dns_name) 
 
 # Destroy the resource group which contains the deployment
 # deployer.destroy()
