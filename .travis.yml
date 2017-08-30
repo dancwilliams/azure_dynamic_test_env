@@ -19,6 +19,6 @@ install:
 - pip install -r requirements.txt
 script:
 - pwd && ssh-keygen -t rsa -N "" -f id_rsa && python azure_deployment.py && AZURE_DNS_NAME=$(<
-  azure_dns) && echo $AZURE_DNS_NAME && ping $AZURE_DNS_NAME && ssh -i $SSH_PATH $AZURE_SSH_USER@$AZURE_DNS_NAME && pwd && exit
+  azure_dns) && echo $AZURE_DNS_NAME && ping -c 5 $AZURE_DNS_NAME && ssh -i $SSH_PATH $AZURE_SSH_USER@$AZURE_DNS_NAME && pwd && exit
 after_script:
 - python delete_resources.py
