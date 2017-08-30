@@ -9,6 +9,7 @@
       yum:
         name: "{{ item }}"
       with_items:
+        - git
         - qemu-kvm
         - qemu-img
         - libvirt
@@ -27,17 +28,17 @@
 
     - name: get url
       get_url:
-        url: "https://releases.hashicorp.com/vagrant/1.9.3/vagrant_1.9.5_x86_64.rpm"
+        url: "https://releases.hashicorp.com/vagrant/1.9.5/vagrant_1.9.5_x86_64.rpm"
         dest: '/tmp/vagrant_1.9.5.rpm'
         validate_certs: no
       
     - name: install Vagrant
       yum:
-        name: '/tmp/vagrant_1.9.3.rpm'
+        name: '/tmp/vagrant_1.9.5.rpm'
         state: present
       become: yes
 
-    - name:
+    - name: install vagrant-libvirt plugin
       shell: 'vagrant plugin install vagrant-libvirt'
       #become: yes
 
@@ -50,9 +51,15 @@
         - pydotplus
         - jinja2
       become: yes
-    
-    - shell: "{{ item }}"
-      with_items: 
-        - systemctl start libvirtd
-        - systemctl enable livirtd
+
+    - name: add user to libvirt group
+      user:
+        name: cumulus
+        shell: /bin/bash
+        groups: libvirt
+        append: yes
       become: yes
+    
+    - name: start and enable libvritd process
+      become: yes
+      service: name=libvirtd enabled=yes state=started
