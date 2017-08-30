@@ -62,7 +62,7 @@ def delete_resources():
             temp_dict['id'] = item.id
             resource_list.append(temp_dict)
 
-        print(resource_list)
+        #print(resource_list)
         print('\n')
 
         for i, item in enumerate(resource_list):

@@ -4,7 +4,7 @@ env:
   - secure: O8qMJPpxb/kn+jr3W7d0vOmklZAItQejFX6zgLiV+1PIAMtXnch+iOYoVOhMe/ULVnrDTTPeWvI0YfCsXHQ5Vn067dKr/faNLwNHHtl/OjczjXeZyi6/TXAZ5awJa0eP5yLVNimmtfserr0uFMHjICvJU73eVUXQLekhBa6LswsViEa96ccxk2Ix5sfR+oxiqamWHGCJktn+OHgY2AgqOj/+JbvFih2Dy5q86gYNm96k6mTp8nF/l1ezSKCH+cHNqG4ji+L7N/9PdLr5rJ6EKm8f9c/nSUjHZ5MO7JefC4ZuJZXYZRWeVm15QOYt2EjiX6i0ogblSAMAIE10yoaw5poRBQvKBNxSnHGb8rXw6Zjz63kmHjIhLcxQy+kxUtf/Ts7TQ683Idoc7TVqlP8OxTwEje3UfWxXFuOP3ALPmb9KSI5dgnBcx+i0x/Th/Yx6FdWEkYl+d1x6lPiS7vBs6ZC3W6kRJ5wqZNep+m8VbpiQgtIiP7dKMnL4MM+t8RDIvzTQ9NfDpETjgArgHX2B6ilIgI5KjAr7eORIgFpzvCs+KarEHNAhvH5MrQrvN98uA+GHQ1GBJtLZjOOFs3bmQwp2t6z7Bsi3EzPYkLaireRBAFBt80ThGmk7pqaQ2m+pP66UBk7saCE3VW+7j+2vZ4an9RWk2khsASJtw5VzCtI=
   - secure: A9oy9TBD6i+cObPonZjVIGggS5hQWgLbRXP5lZ8UcdRmk5age533GIhKZQoBKBL+29i1asOLb/Xxe/7JArUQIubCNjOjEib3zucP2QHKdJs9LlZ80d3N1hqCjy7NoEESqsxIyVYhP1ixUFw0AiusCsrDuby8Elv85grT0f39XtIlhL7CgA3kWH8T189vYTjdfkwnJTQOztItNSBN+XPNYuaKOXK/AF25lWzoCZvACOmmDtJx6feqTKx+L4Ly/+GJzIkhFfBtR7aTD156EBYazeePjLOi4390jxVZ4N6ehIO7qUBsipuBia2cEJGICyKgir0vV7hIOpKAsOtaY1glAz6Xdktr+vkyZTfKcI2QNINZRyQXjRuH3uHtBN7YaGm44KNP6wmU/x8x0JYe9lyudn9l1s97J2vJ6TMOsKHCNLKYvROzOZfA83qJClClqMSK6QJbXEHJYm3B8IjTs6Sy+D9NYRPkPyZiASiLervylYlCop8C2H6b1C5VSdX6h2eFEz6cJztfq+rgnphyJlmgebJxo33gJFy0FH3kMyHRK1B0RF0I87wTRsqzuEFMe2AluSYXON6hpwTyRMRijEHY1Hrcl9GVI2kF9QN6eMA2g0IermInDkosf9jHQed8iWpRfLpBOblWPe4kNauDLU6VETJt9wOad4yBGLpEZSzcrJ4=
   - secure: q37pNt71sQ7XdirX8fyCu6JC841KXuEYZiBaNe8UThV3PJcdDo1coEjb2h5J0e6HRgC/75wpDMdys9nl70/dwVeew7CxRZwgNjYngZS7OS+kji16R8uPZ4kJ/gEthx8AWQywHUTz3haUVpNQ2T0NhOG9WfEjbHHGzbyqdoZtJgpBYeyeBQUMDm86EtpcRg3xhQ+UZ0p9exyfSP0mIYNvGIYhrROefRebbxCVb8k2rEnmhztJQ19qcUKWS7bGX7I/eIAO2nEEQuFQL1yqtpTsk7/nGJ0QpCwXMK2J6UxMzgjtItGfce4rz6rbbrEAyZrNt1nHLnVsZfqmMhayhSVFnU9BLsUZYpiNiMCkiz1bGvAFuqwjY2V2VI1mOuJHi79FanytObX1Gs2NVEUvxSwiDqCZYxdtBVPcepLMsZjHz3/1Ql0Qy1BzoHzECwl3aRLWnU09B0GPi99WXj9ZPUxac8qeR0sfsKlafUejwZrDHdLJmN7FzipN3f7one054p++ylWIbNlbEb0eRwSGwgCosHTQApqCu1WlK+guboMxqrUHqj45rb4SKjirUn0lRb1rF9K0URgqgC6IKetXRzejM7+xVqTYiMcUlquPfDrDq1m5DLtr1HvPrWhoh7K29rSXCq2HunO1PuXImPlZVT3f8LlpJpcvvIUOLdOE+tqEiKg=
-sudo: true
+sudo: false
 language: python
 dist: trusty
 python: 2.7
@@ -13,9 +13,14 @@ os:
 install:
 - pip install -r requirements.txt
 script:
-- ssh-keygen -t rsa -N "" -f id_rsa && python azure_deployment.py && AZURE_DNS_NAME=$(<
-  azure_dns) && echo $AZURE_DNS_NAME && ping -c 5 $AZURE_DNS_NAME && ssh -o "StrictHostKeyChecking
-  no" $AZURE_DNS_NAME && ssh -vvv -i id_rsa cumulus@$AZURE_DNS_NAME &&
-  pwd && exit
+- ssh-keygen -t rsa -N "" -f id_rsa
+- python azure_deployment.py
+- AZURE_DNS_NAME=$(< azure_dns)
+- echo $AZURE_DNS_NAME
+- ping -c 5 $AZURE_DNS_NAME
+- ssh -o "StrictHostKeyChecking no" $AZURE_DNS_NAME
+- ssh -i id_rsa cumulus@$AZURE_DNS_NAME
+- pwd
+- exit
 after_script:
 - python delete_resources.py
