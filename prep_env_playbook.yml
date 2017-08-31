@@ -10,6 +10,7 @@
       yum:
         name: "@Development tools"
         state: present
+      become: yes
 
     - name: add packages
       yum:
