@@ -5,37 +5,36 @@
   hosts: localhost
 
   tasks:
-
-    - name: install the 'Development tools' package group
-      yum:
-        name: "@Development tools"
-        state: present
-
     - name: add packages
       yum:
         name: "{{ item }}"
       with_items:
         - git
         - qemu-kvm
+        - qemu-img
         - libvirt
+        - libvirt-python
+        - libvirt-client
         - virt-install
+        - virt-viewer
         - bridge-utils
-        - libvirt-devel
+        - ruby-devel
+        - gcc
         - libxslt-devel
         - libxml2-devel
         - libvirt-devel
-        - libguestfs-tools-c
+        # - libguestfs-tools-C
       become: yes
 
     - name: get url
       get_url:
-        url: "https://releases.hashicorp.com/vagrant/1.9.4/vagrant_1.9.4_x86_64.rpm"
-        dest: '/tmp/vagrant_1.9.4.rpm'
+        url: "https://releases.hashicorp.com/vagrant/1.9.5/vagrant_1.9.5_x86_64.rpm"
+        dest: '/tmp/vagrant_1.9.5.rpm'
         validate_certs: no
       
     - name: install Vagrant
       yum:
-        name: '/tmp/vagrant_1.9.4.rpm'
+        name: '/tmp/vagrant_1.9.5.rpm'
         state: present
       become: yes
 
@@ -64,4 +63,3 @@
     - name: start and enable libvritd process
       become: yes
       service: name=libvirtd enabled=yes state=started
-
