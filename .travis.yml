@@ -12,7 +12,7 @@ os:
 - linux
 install:
 - pip install -r requirements.txt
-- ls -ltr ~/.shh
+- ls -ltr ~/.ssh
 - mkdir ~/.ssh
 - chmod ~/.ssh
 script:
