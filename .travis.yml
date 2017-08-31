@@ -13,7 +13,7 @@ os:
 install:
 - pip install -r requirements.txt
 script:
-- ssh-keygen -t rsa -N "" -f ~/.ssh/
+- ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 - python azure_deployment.py
 - AZURE_DNS_NAME=$(< azure_dns)
 - echo $AZURE_DNS_NAME
