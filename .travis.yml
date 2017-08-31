@@ -19,7 +19,6 @@ script:
 - echo $AZURE_DNS_NAME
 - ssh-keyscan $AZURE_DNS_NAME >>~/.ssh/known_hosts
 - ls -ltr ~/.ssh
-- ssh -o "StrictHostKeyChecking no" $AZURE_DNS_NAME
 - ssh cumulus@$AZURE_DNS_NAME 'pwd'
 - ssh cumulus@$AZURE_DNS_NAME 'ls -ltr'
 - ssh cumulus@$AZURE_DNS_NAME 'sudo yum -y install epel-release'
