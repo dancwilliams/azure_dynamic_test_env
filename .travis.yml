@@ -26,9 +26,9 @@ script:
 - ssh cumulus@$AZURE_DNS_NAME 'sudo yum -y install python-pip'
 - ssh cumulus@$AZURE_DNS_NAME 'sudo pip install --upgrade pip'
 - ssh cumulus@$AZURE_DNS_NAME 'sudo yum -y install ansible'
-- ssh cumulus@$AZURE_DNS_NAME 'wget https://raw.githubusercontent.com/dancwilliams/azure_dynamic_test_env/master/prep_env_playbook.yml'
-- ssh cumulus@$AZURE_DNS_NAME 'ansible-playbook prep_env_playbook.yml'
-- ssh cumulus@$AZURE_DNS_NAME 'git clone https://github.com/CumulusNetworks/cldemo-vagrant'
+#- ssh cumulus@$AZURE_DNS_NAME 'wget https://raw.githubusercontent.com/dancwilliams/azure_dynamic_test_env/master/prep_env_playbook.yml'
+#- ssh cumulus@$AZURE_DNS_NAME 'ansible-playbook prep_env_playbook.yml'
+#- ssh cumulus@$AZURE_DNS_NAME 'git clone https://github.com/CumulusNetworks/cldemo-vagrant'
 #- ssh cumulus@$AZURE_DNS_NAME 'cd cldemo-vagrant && vagrant up oob-mgmt-server oob-mgmt-switch --provider=libvirt --no-parallel'
-after_script:
-- python delete_resources.py
+#after_script:
+#- python delete_resources.py
