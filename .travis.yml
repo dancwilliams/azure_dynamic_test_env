@@ -12,26 +12,24 @@ os:
 - linux
 install:
 - pip install -r requirements.txt
-- ls -ltr ~/.ssh
-- mkdir ~/.ssh
-- chmod ~/.ssh
 script:
-- ssh-keygen -t rsa -N "" -f id_rsa
+- ssh-keygen -t rsa -N "" -f ~/.ssh/
 - python azure_deployment.py
 - AZURE_DNS_NAME=$(< azure_dns)
 - echo $AZURE_DNS_NAME
 - ssh-keyscan $AZURE_DNS_NAME >>~/.ssh/known_hosts
+- ls -ltr ~/.ssh
 - ssh -o "StrictHostKeyChecking no" $AZURE_DNS_NAME
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'pwd'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'ls -ltr'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'sudo yum -y install epel-release'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'sudo yum -y update'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'sudo yum -y install python-pip'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'sudo pip install --upgrade pip'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'sudo yum -y install ansible'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'wget https://raw.githubusercontent.com/dancwilliams/azure_dynamic_test_env/master/prep_env_playbook.yml'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'ansible-playbook prep_env_playbook.yml'
-- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'git clone https://github.com/CumulusNetworks/cldemo-vagrant'
-#- ssh -i id_rsa cumulus@$AZURE_DNS_NAME 'cd cldemo-vagrant && vagrant up oob-mgmt-server oob-mgmt-switch --provider=libvirt --no-parallel'
+- ssh cumulus@$AZURE_DNS_NAME 'pwd'
+- ssh cumulus@$AZURE_DNS_NAME 'ls -ltr'
+- ssh cumulus@$AZURE_DNS_NAME 'sudo yum -y install epel-release'
+- ssh cumulus@$AZURE_DNS_NAME 'sudo yum -y update'
+- ssh cumulus@$AZURE_DNS_NAME 'sudo yum -y install python-pip'
+- ssh cumulus@$AZURE_DNS_NAME 'sudo pip install --upgrade pip'
+- ssh cumulus@$AZURE_DNS_NAME 'sudo yum -y install ansible'
+- ssh cumulus@$AZURE_DNS_NAME 'wget https://raw.githubusercontent.com/dancwilliams/azure_dynamic_test_env/master/prep_env_playbook.yml'
+- ssh cumulus@$AZURE_DNS_NAME 'ansible-playbook prep_env_playbook.yml'
+- ssh cumulus@$AZURE_DNS_NAME 'git clone https://github.com/CumulusNetworks/cldemo-vagrant'
+#- ssh cumulus@$AZURE_DNS_NAME 'cd cldemo-vagrant && vagrant up oob-mgmt-server oob-mgmt-switch --provider=libvirt --no-parallel'
 after_script:
 - python delete_resources.py

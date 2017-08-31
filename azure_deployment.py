@@ -1,4 +1,3 @@
-import os
 import os.path
 from deployer import Deployer
 
@@ -11,7 +10,7 @@ from deployer import Deployer
 
 my_subscription_id = os.environ.get('AZURE_SUBSCRIPTION_ID', '11111111-1111-1111-1111-111111111111')   # your Azure Subscription Id
 my_resource_group = 'cumulustest'            # the resource group for deployment
-my_pub_ssh_key_path = os.getcwd() + "/id_rsa.pub"  # the path to your rsa public key file
+my_pub_ssh_key_path = os.path.expanduser('~/.ssh/id_rsa.pub')  # the path to your rsa public key file
 
 msg = "\nInitializing the Deployer class\n"
 print(msg)
